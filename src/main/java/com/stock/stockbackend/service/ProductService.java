@@ -1,4 +1,4 @@
-package com.stock.stockbackend.security;
+package com.stock.stockbackend.service;
 
 import com.stock.stockbackend.model.Product;
 import com.stock.stockbackend.repository.ProductRepository;
