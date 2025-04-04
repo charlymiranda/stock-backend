@@ -27,6 +27,10 @@ public class Sale {
 
     private Double total;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
     private List<SaleItem> items = new ArrayList<>();
 }
