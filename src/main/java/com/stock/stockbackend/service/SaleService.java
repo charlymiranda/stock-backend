@@ -3,6 +3,7 @@ package com.stock.stockbackend.service;
 import com.stock.stockbackend.dto.DailySalesReportDTO;
 import com.stock.stockbackend.dto.ProductSalesReportDTO;
 import com.stock.stockbackend.dto.SaleRequestDTO;
+import com.stock.stockbackend.dto.UserSalesReportDTO;
 import com.stock.stockbackend.model.Product;
 import com.stock.stockbackend.model.Sale;
 import com.stock.stockbackend.model.SaleItem;
@@ -98,6 +99,10 @@ public class SaleService {
             report.add(dto);
         }
         return report;
+    }
+
+    public List<UserSalesReportDTO> getSalesByUser(LocalDateTime from, LocalDateTime to) {
+        return saleRepository.getSalesByUserBetween(from, to);
     }
 
 }

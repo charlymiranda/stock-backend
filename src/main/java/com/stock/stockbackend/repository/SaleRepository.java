@@ -1,5 +1,6 @@
 package com.stock.stockbackend.repository;
 
+import com.stock.stockbackend.dto.UserSalesReportDTO;
 import com.stock.stockbackend.model.Sale;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,11 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
         "WHERE date BETWEEN :start AND :end " +
         "GROUP BY CAST(date AS DATE)", nativeQuery = true)
     List<Object[]> getDailySalesReport(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
+
+    @Query("SELECT new com.stock.stockbackend.dto.UserSalesReportDTO(s.user.email, COUNT(s), SUM(s.total))" +
+        " FROM Sale s WHERE s.date BETWEEN :start AND :end GROUP BY s.user.email")
+    List<UserSalesReportDTO> getSalesByUserBetween(
+        @Param("start") LocalDateTime start,
+        @Param("end") LocalDateTime end
+    );
 }

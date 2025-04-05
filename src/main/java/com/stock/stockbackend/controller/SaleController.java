@@ -3,6 +3,7 @@ package com.stock.stockbackend.controller;
 import com.stock.stockbackend.dto.DailySalesReportDTO;
 import com.stock.stockbackend.dto.ProductSalesReportDTO;
 import com.stock.stockbackend.dto.SaleRequestDTO;
+import com.stock.stockbackend.dto.UserSalesReportDTO;
 import com.stock.stockbackend.model.Sale;
 import com.stock.stockbackend.service.SaleService;
 import lombok.RequiredArgsConstructor;
@@ -47,5 +48,14 @@ public class SaleController {
     ) {
         return saleService.getDailySalesReport(from, to);
     }
+
+    @GetMapping("/report/users")
+    public List<UserSalesReportDTO> getSalesByUser(
+        @RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+        @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to
+    ) {
+        return saleService.getSalesByUser(from, to);
+    }
+
 
 }
