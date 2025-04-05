@@ -2,8 +2,9 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/stock
-    username: tu_usuario
-    password: tu_password
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
@@ -11,8 +12,9 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  jackson:
-    serialization:
-      indent_output: true
+    jackson:
+      serialization:
+        indent_output: true
+
 server:
   port: 8080
