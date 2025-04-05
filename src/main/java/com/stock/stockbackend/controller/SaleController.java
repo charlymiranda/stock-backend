@@ -1,6 +1,7 @@
 package com.stock.stockbackend.controller;
 
 import com.stock.stockbackend.dto.*;
+import com.stock.stockbackend.mapper.SaleMapper;
 import com.stock.stockbackend.model.Sale;
 import com.stock.stockbackend.service.SaleService;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +19,9 @@ public class SaleController {
     private final SaleService saleService;
 
     @PostMapping
-    public Sale createSale(@RequestBody SaleRequestDTO request) {
-        return saleService.createSale(request);
+    public SaleResponseDTO  createSale(@RequestBody SaleRequestDTO request) {
+        Sale sale = saleService.createSale(request);
+        return SaleMapper.toDTO(sale);
     }
 
     @GetMapping
