@@ -1,9 +1,6 @@
 package com.stock.stockbackend.service;
 
-import com.stock.stockbackend.dto.DailySalesReportDTO;
-import com.stock.stockbackend.dto.ProductSalesReportDTO;
-import com.stock.stockbackend.dto.SaleRequestDTO;
-import com.stock.stockbackend.dto.UserSalesReportDTO;
+import com.stock.stockbackend.dto.*;
 import com.stock.stockbackend.model.Product;
 import com.stock.stockbackend.model.Sale;
 import com.stock.stockbackend.model.SaleItem;
@@ -104,5 +101,26 @@ public class SaleService {
     public List<UserSalesReportDTO> getSalesByUser(LocalDateTime from, LocalDateTime to) {
         return saleRepository.getSalesByUserBetween(from, to);
     }
+
+    public List<SaleResponseDTO> getSalesAsDTO(LocalDateTime from, LocalDateTime to) {
+        return saleRepository.findByDateBetween(from, to).stream().map(sale ->
+            new SaleResponseDTO(
+                sale.getId(),
+                sale.getDate(),
+                sale.getCustomer(),
+                sale.getPaymentMethod(),
+                sale.getTotal(),
+                sale.getUser().getEmail(),
+                sale.getItems().stream().map(item ->
+                    new SaleResponseDTO.SaleItemDTO(
+                        item.getProduct().getName(),
+                        item.getQuantity(),
+                        item.getPrice()
+                    )
+                ).toList()
+            )
+        ).toList();
+    }
+
 
 }

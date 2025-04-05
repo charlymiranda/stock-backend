@@ -1,7 +1,11 @@
 package com.stock.stockbackend.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,6 +33,7 @@ public class Sale {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @NotNull
     private User user;
 
     @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
