@@ -1,9 +1,7 @@
 package com.stock.stockbackend.controller;
 
-import com.stock.stockbackend.dto.DailySalesReportDTO;
-import com.stock.stockbackend.dto.ProductSalesReportDTO;
-import com.stock.stockbackend.dto.SaleRequestDTO;
-import com.stock.stockbackend.dto.UserSalesReportDTO;
+import com.stock.stockbackend.dto.*;
+import com.stock.stockbackend.mapper.SaleMapper;
 import com.stock.stockbackend.model.Sale;
 import com.stock.stockbackend.service.SaleService;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +19,9 @@ public class SaleController {
     private final SaleService saleService;
 
     @PostMapping
-    public Sale createSale(@RequestBody SaleRequestDTO request) {
-        return saleService.createSale(request);
+    public SaleResponseDTO  createSale(@RequestBody SaleRequestDTO request) {
+        Sale sale = saleService.createSale(request);
+        return SaleMapper.toDTO(sale);
     }
 
     @GetMapping
@@ -55,6 +54,14 @@ public class SaleController {
         @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to
     ) {
         return saleService.getSalesByUser(from, to);
+    }
+
+    @GetMapping("/report/full")
+    public List<SaleResponseDTO> getSalesFull(
+        @RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
+        @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to
+    ) {
+        return saleService.getSalesAsDTO(from, to);
     }
 
 

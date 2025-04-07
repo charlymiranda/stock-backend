@@ -1,10 +1,9 @@
 package com.stock.stockbackend.controller;
 
 import com.stock.stockbackend.dto.ProductDTO;
-import com.stock.stockbackend.dto.ProductMapper;
+import com.stock.stockbackend.mapper.ProductMapper;
 import com.stock.stockbackend.model.Product;
 import com.stock.stockbackend.service.ProductService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,20 +18,20 @@ public class ProductController {
     @GetMapping
     public List<ProductDTO> getAll() {
         return productService.getAll()
-                .stream()
-                .map(ProductMapper::toDTO)
-                .toList();
+            .stream()
+            .map(ProductMapper::toDTO)
+            .toList();
     }
 
     @PostMapping
-    public ProductDTO create(@Valid @RequestBody ProductDTO dto) {
-        Product saved = productService.create(ProductMapper.toEntity(dto));
-        return ProductMapper.toDTO(saved);
+    public ProductDTO create(@RequestBody ProductDTO dto) {
+        Product product = productService.create(dto);
+        return ProductMapper.toDTO(product);
     }
 
     @PutMapping("/{id}")
-    public ProductDTO update(@PathVariable Long id, @Valid @RequestBody ProductDTO dto) {
-        Product updated = productService.update(id, ProductMapper.toEntity(dto));
+    public ProductDTO update(@PathVariable Long id, @RequestBody ProductDTO dto) {
+        Product updated = productService.update(id, dto);
         return ProductMapper.toDTO(updated);
     }
 

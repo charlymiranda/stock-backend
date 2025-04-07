@@ -1,5 +1,6 @@
-package com.stock.stockbackend.dto;
+package com.stock.stockbackend.mapper;
 
+import com.stock.stockbackend.dto.ProductDTO;
 import com.stock.stockbackend.model.Product;
 
 public class ProductMapper {
@@ -26,4 +27,14 @@ public class ProductMapper {
                 .stock(product.getStock())
                 .build();
     }
+
+    public static void updateEntity(Product product, ProductDTO dto) {
+        product.setCode(dto.getCode());
+        product.setName(dto.getName());
+        product.setCategory(dto.getCategory());
+        product.setProvider(dto.getProvider());
+        product.setPrice(dto.getPrice());
+        product.setStock(dto.getStock());
+    }
+
 }
