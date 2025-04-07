@@ -25,8 +25,6 @@ public class Sale {
 
     private LocalDateTime date;
 
-    private String customer;
-
     private String paymentMethod;
 
     private Double total;

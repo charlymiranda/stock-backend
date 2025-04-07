@@ -11,7 +11,6 @@ public class SaleMapper {
         return new SaleResponseDTO(
             sale.getId(),
             sale.getDate(),
-            sale.getCustomer(),
             sale.getPaymentMethod(),
             sale.getTotal(),
             sale.getUser() != null ? sale.getUser().getEmail() : null,

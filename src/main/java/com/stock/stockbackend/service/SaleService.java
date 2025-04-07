@@ -60,7 +60,6 @@ public class SaleService {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         Sale sale = Sale.builder()
-            .customer(request.getCustomer())
             .paymentMethod(request.getPaymentMethod())
             .date(LocalDateTime.now())
             .total(total)
@@ -107,7 +106,6 @@ public class SaleService {
             new SaleResponseDTO(
                 sale.getId(),
                 sale.getDate(),
-                sale.getCustomer(),
                 sale.getPaymentMethod(),
                 sale.getTotal(),
                 sale.getUser().getEmail(),

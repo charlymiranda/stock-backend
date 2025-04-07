@@ -11,7 +11,6 @@ import java.util.List;
 public class SaleResponseDTO {
     private Long id;
     private LocalDateTime date;
-    private String customer;
     private String paymentMethod;
     private Double total;
     private String sellerEmail;
