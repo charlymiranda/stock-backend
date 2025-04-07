@@ -6,7 +6,6 @@ import java.util.List;
 
 @Data
 public class SaleRequestDTO {
-    private String customer;
     private String paymentMethod;
     private List<ItemDTO> items;
 
