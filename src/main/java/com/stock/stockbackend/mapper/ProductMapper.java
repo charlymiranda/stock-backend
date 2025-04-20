@@ -4,37 +4,46 @@ import com.stock.stockbackend.dto.ProductDTO;
 import com.stock.stockbackend.model.Product;
 
 public class ProductMapper {
+
     public static Product toEntity(ProductDTO dto) {
         return Product.builder()
-                .id(dto.getId())
-                .code(dto.getCode())
-                .name(dto.getName())
-                .category(dto.getCategory())
-                .provider(dto.getProvider())
-                .price(dto.getPrice())
-                .stock(dto.getStock())
-                .build();
+            .id(dto.getId())
+            .code(dto.getCode())
+            .name(dto.getName())
+            .size(dto.getSize())
+            .color(dto.getColor())
+            .stock(dto.getStock())
+            .netPrice(dto.getNetPrice())
+            .listPrice(dto.getListPrice())
+            .transferPrice(dto.getTransferPrice())
+            .cashPrice(dto.getCashPrice())
+            .build();
     }
 
     public static ProductDTO toDTO(Product product) {
         return ProductDTO.builder()
-                .id(product.getId())
-                .code(product.getCode())
-                .name(product.getName())
-                .category(product.getCategory())
-                .provider(product.getProvider())
-                .price(product.getPrice())
-                .stock(product.getStock())
-                .build();
+            .id(product.getId())
+            .code(product.getCode())
+            .name(product.getName())
+            .size(product.getSize())
+            .color(product.getColor())
+            .stock(product.getStock())
+            .netPrice(product.getNetPrice())
+            .listPrice(product.getListPrice())
+            .transferPrice(product.getTransferPrice())
+            .cashPrice(product.getCashPrice())
+            .build();
     }
 
     public static void updateEntity(Product product, ProductDTO dto) {
         product.setCode(dto.getCode());
         product.setName(dto.getName());
-        product.setCategory(dto.getCategory());
-        product.setProvider(dto.getProvider());
-        product.setPrice(dto.getPrice());
+        product.setSize(dto.getSize());
+        product.setColor(dto.getColor());
         product.setStock(dto.getStock());
+        product.setNetPrice(dto.getNetPrice());
+        product.setListPrice(dto.getListPrice());
+        product.setTransferPrice(dto.getTransferPrice());
+        product.setCashPrice(dto.getCashPrice());
     }
-
 }

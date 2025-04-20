@@ -11,9 +11,12 @@ public class ProductDTO {
     private Long id;
     private String code;
     private String name;
-    private String category;
-    private String provider;
-    private Double price;
     private Integer stock;
+    private String size;  // 👈 talle (ej: S, M, L)
+    private String color; // 👈 color (ej: rojo, negro)
+    private Double netPrice;      // 👈 precio de costo
+    private Double listPrice;     // 👈 precio al público
+    private Double transferPrice; // 👈 15% descuento
+    private Double cashPrice;     // 👈 20% descuento
 }
 

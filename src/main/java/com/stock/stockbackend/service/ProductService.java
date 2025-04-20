@@ -24,10 +24,13 @@ public class ProductService {
                 p.getId(),
                 p.getCode(),
                 p.getName(),
-                p.getCategory(),
-                p.getProvider(),
-                p.getPrice(),
-                p.getStock()
+                p.getStock(),
+                p.getSize(),
+                p.getColor(),
+                p.getNetPrice(),
+                p.getListPrice(),
+                p.getTransferPrice(),
+                p.getCashPrice()
             ))
             .toList();
     }
