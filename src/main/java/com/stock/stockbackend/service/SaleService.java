@@ -44,13 +44,15 @@ public class SaleService {
             // Descontar stock
             product.setStock(product.getStock() - itemDTO.getQuantity());
 
-            double itemTotal = product.getPrice() * itemDTO.getQuantity();
+            double selectedPrice = getPriceByPaymentMethod(product, request.getPaymentMethod());
+
+            double itemTotal = selectedPrice * itemDTO.getQuantity();
             total += itemTotal;
 
             SaleItem saleItem = SaleItem.builder()
                 .product(product)
                 .quantity(itemDTO.getQuantity())
-                .price(product.getPrice())
+                .price(selectedPrice)
                 .build();
 
             saleItems.add(saleItem);
@@ -118,6 +120,14 @@ public class SaleService {
                 ).toList()
             )
         ).toList();
+    }
+
+    private double getPriceByPaymentMethod(Product product, String paymentMethod) {
+        return switch (paymentMethod) {
+            case "Transferencia" -> product.getTransferPrice();
+            case "Efectivo" -> product.getCashPrice();
+            default -> product.getListPrice();
+        };
     }
 
 
