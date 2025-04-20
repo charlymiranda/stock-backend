@@ -1,0 +1,19 @@
+# .github/workflows/configure-repo.yml
+name: Configure repository
+
+on:
+  push:
+    branches: [main, master]
+
+jobs:
+  settings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.repos.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              delete_branch_on_merge: true
+            });
