@@ -1,0 +1,16 @@
+# .github/workflows/deploy-prod.yml
+name: Deploy to Production
+
+on:
+  workflow_dispatch: # se ejecuta manualmente
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Agregar los pasos de deploy reales acá
+      - name: Placeholder for future deployment
+        run: echo "🚀 Aquí irá tu despliegue a producción"
