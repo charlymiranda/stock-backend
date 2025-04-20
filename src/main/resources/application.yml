@@ -6,7 +6,7 @@ spring:
     password: postgres
     driver-class-name: org.postgresql.Driver
   flyway:
-    enabled: true
+    enabled: false
     baseline-on-migrate: true
   jpa:
     hibernate:
