@@ -12,42 +12,33 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ProductService {
+
     private final ProductRepository productRepository;
 
-    public List<Product> getAll() {
-        return productRepository.findAll();
-    }
-
-    public List<ProductDTO> getAllProducts() {
-        return productRepository.findAll().stream()
-            .map(p -> new ProductDTO(
-                p.getId(),
-                p.getCode(),
-                p.getName(),
-                p.getStock(),
-                p.getSize(),
-                p.getColor(),
-                p.getNetPrice(),
-                p.getListPrice(),
-                p.getTransferPrice(),
-                p.getCashPrice()
-            ))
+    public List<ProductDTO> getAll() {
+        return productRepository.findAll()
+            .stream()
+            .map(ProductMapper::toDTO)
             .toList();
     }
 
-
-    public Product create(ProductDTO dto) {
-        Product product = ProductMapper.toEntity(dto);
-        return productRepository.save(product);
+    public ProductDTO getById(Long id) {
+        Product product = productRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
+        return ProductMapper.toDTO(product);
     }
 
-    public Product update(Long id, ProductDTO dto) {
-        Product existing = productRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+    public ProductDTO create(ProductDTO dto) {
+        Product product = ProductMapper.toEntity(dto);
+        return ProductMapper.toDTO(productRepository.save(product));
+    }
 
-        ProductMapper.updateEntity(existing, dto);
+    public ProductDTO update(Long id, ProductDTO dto) {
+        Product product = productRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
 
-        return productRepository.save(existing);
+        ProductMapper.updateEntity(product, dto);
+        return ProductMapper.toDTO(productRepository.save(product));
     }
 
     public void delete(Long id) {
