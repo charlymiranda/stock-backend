@@ -40,4 +40,15 @@ public class ProductController {
         productService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{productId}/stock-increase")
+    public ResponseEntity<Void> increaseStock(
+        @PathVariable Long productId,
+        @RequestParam int quantity) {
+
+        productService.increaseStock(productId, quantity);
+        return ResponseEntity.ok().build();
+    }
+
+
 }

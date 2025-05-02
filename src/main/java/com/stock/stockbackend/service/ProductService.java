@@ -44,4 +44,12 @@ public class ProductService {
     public void delete(Long id) {
         productRepository.deleteById(id);
     }
+
+    public void increaseStock(Long productId, int quantity) {
+        Product product = productRepository.findById(productId)
+            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        product.setStock(product.getStock() + quantity);
+        productRepository.save(product);
+    }
+
 }
